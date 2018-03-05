@@ -51,6 +51,34 @@ namespace DesignPatterns
         }
     }
 
+    public class SizeSpecification : Ispecification<Product>
+    {
+        private Size Size;
+        public SizeSpecification(Size size)
+        {
+            this.Size = size;
+        }
+        public bool IsSatisfied(Product t)
+        {
+            return t.Size == this.Size;
+        }
+    }
+
+    public class AndSpecification<T> : Ispecification<T>
+    {
+        private Ispecification<T> first, second;
+
+        public AndSpecification(Ispecification<T> first, Ispecification<T> second)
+        {
+            this.first = first;
+            this.second = second;
+        }
+        public bool IsSatisfied(T t)
+        {
+            return first.IsSatisfied(t) && second.IsSatisfied(t);
+        }
+    }
+
     public class BetterFilter : IFilter<Product>
     {
         public IEnumerable<Product> Filter(IEnumerable<Product> items, Ispecification<Product> spec)
@@ -90,6 +118,10 @@ namespace DesignPatterns
         }
     }
 
+    /// <summary>
+    /// Open close principle states that a class should always be open for extension but close for modifications
+    /// So that, whenever someone wants to chnage the behavior of functionality, it should be done on extended classes/methods keeping the old behavior intact
+    /// </summary>
     public class OpenClosePrinciple
     {
         static void Main(string[] args)
@@ -99,6 +131,7 @@ namespace DesignPatterns
             var house = new Product("House", Color.Blue, Size.Large);
             Product[] products = { apple, tree, house };
 
+            #region Old Product Filter - without Specifications, which breaks open-close principle
             var pf = new ProductFilter();
             Console.WriteLine("Green Products by Old Method (filter implemented in the class) : \n");
             var smallProducts = pf.FilterBySize(products, Size.Small);
@@ -107,9 +140,11 @@ namespace DesignPatterns
             {
                 Console.WriteLine(string.Format("{0} is Green", p.Name));
             }
-            Console.WriteLine("\n--------------------------------\n");
+            Console.WriteLine("--------------------------------");
             Console.WriteLine(@"Green Products by New Method (filter implemented as a specification)");
+            #endregion
 
+            #region Product Filter implemented using specifications which doesn't break open-close principle
             var bf = new BetterFilter();
             var colorSpec = new ColorSpecification(Color.Green);
             foreach (var p in bf.Filter(products, colorSpec))
@@ -117,6 +152,15 @@ namespace DesignPatterns
                 Console.WriteLine(string.Format("{0} is Green", p.Name));
             }
 
+            Console.WriteLine("--------------------------------");
+            Console.WriteLine("Large Blue Products : using specifications");
+            foreach (var p in bf.Filter(products,
+                new AndSpecification<Product>(new ColorSpecification(Color.Blue),
+                new SizeSpecification(Size.Large))))
+            {
+                Console.WriteLine(string.Format("Product {0} is Large and Blue", p.Name));
+            }
+            #endregion
             Console.ReadKey();
         }
     }
