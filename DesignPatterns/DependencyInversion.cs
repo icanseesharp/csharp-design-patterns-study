@@ -48,6 +48,17 @@ namespace DesignPatterns
 
         public class Research //high-level module
         {
+            public Research(Relationships relationships) //this constructor doesn't use DI, for this to work, the relations object of low-level module has to be exposed as public property
+            {
+                //var relations = relationships.Relations;
+                //foreach (var r in relations
+                //  .Where(x => x.Item1.Name == "John"
+                //              && x.Item2 == Relationship.Parent))
+                //{
+                //  WriteLine("John has a child called {0}",r.Item3.Name);
+                //}
+            }
+
             public Research(IRelationshipBrowser relationshipBrowser)
             {
                 foreach(var p in relationshipBrowser.FindAllChildrenOf("John"))
