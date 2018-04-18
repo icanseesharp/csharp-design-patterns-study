@@ -124,44 +124,44 @@ namespace DesignPatterns
     /// </summary>
     public class OpenClosePrinciple
     {
-        static void Main(string[] args)
-        {
-            var apple = new Product("Apple", Color.Green, Size.Small);
-            var tree = new Product("Tree", Color.Green, Size.Medium);
-            var house = new Product("House", Color.Blue, Size.Large);
-            Product[] products = { apple, tree, house };
+        //static void Main(string[] args)
+        //{
+        //    var apple = new Product("Apple", Color.Green, Size.Small);
+        //    var tree = new Product("Tree", Color.Green, Size.Medium);
+        //    var house = new Product("House", Color.Blue, Size.Large);
+        //    Product[] products = { apple, tree, house };
 
-            #region Old Product Filter - without Specifications, which breaks open-close principle
-            var pf = new ProductFilter();
-            Console.WriteLine("Green Products by Old Method (filter implemented in the class) : \n");
-            var smallProducts = pf.FilterBySize(products, Size.Small);
-            var greenProducts = pf.FilterByColor(products, Color.Green);
-            foreach (var p in pf.FilterByColor(products, Color.Green))
-            {
-                Console.WriteLine(string.Format("{0} is Green", p.Name));
-            }
-            Console.WriteLine("--------------------------------");
-            Console.WriteLine(@"Green Products by New Method (filter implemented as a specification)");
-            #endregion
+        //    #region Old Product Filter - without Specifications, which breaks open-close principle
+        //    var pf = new ProductFilter();
+        //    Console.WriteLine("Green Products by Old Method (filter implemented in the class) : \n");
+        //    var smallProducts = pf.FilterBySize(products, Size.Small);
+        //    var greenProducts = pf.FilterByColor(products, Color.Green);
+        //    foreach (var p in pf.FilterByColor(products, Color.Green))
+        //    {
+        //        Console.WriteLine(string.Format("{0} is Green", p.Name));
+        //    }
+        //    Console.WriteLine("--------------------------------");
+        //    Console.WriteLine(@"Green Products by New Method (filter implemented as a specification)");
+        //    #endregion
 
-            #region Product Filter implemented using specifications which doesn't break open-close principle
-            var bf = new BetterFilter();
-            var colorSpec = new ColorSpecification(Color.Green);
-            foreach (var p in bf.Filter(products, colorSpec))
-            {
-                Console.WriteLine(string.Format("{0} is Green", p.Name));
-            }
+        //    #region Product Filter implemented using specifications which doesn't break open-close principle
+        //    var bf = new BetterFilter();
+        //    var colorSpec = new ColorSpecification(Color.Green);
+        //    foreach (var p in bf.Filter(products, colorSpec))
+        //    {
+        //        Console.WriteLine(string.Format("{0} is Green", p.Name));
+        //    }
 
-            Console.WriteLine("--------------------------------");
-            Console.WriteLine("Large Blue Products : using specifications");
-            foreach (var p in bf.Filter(products,
-                new AndSpecification<Product>(new ColorSpecification(Color.Blue),
-                new SizeSpecification(Size.Large))))
-            {
-                Console.WriteLine(string.Format("Product {0} is Large and Blue", p.Name));
-            }
-            #endregion
-            Console.ReadKey();
-        }
+        //    Console.WriteLine("--------------------------------");
+        //    Console.WriteLine("Large Blue Products : using specifications");
+        //    foreach (var p in bf.Filter(products,
+        //        new AndSpecification<Product>(new ColorSpecification(Color.Blue),
+        //        new SizeSpecification(Size.Large))))
+        //    {
+        //        Console.WriteLine(string.Format("Product {0} is Large and Blue", p.Name));
+        //    }
+        //    #endregion
+        //    Console.ReadKey();
+        //}
     }
 }
