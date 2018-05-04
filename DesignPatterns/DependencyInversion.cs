@@ -66,19 +66,19 @@ namespace DesignPatterns
                     Console.WriteLine("John has a child called : {0}", p.Name);
                 }                 
             }
-            static void Main(string[] args)
-            {
-                var parent = new Person("John");
-                var child1 = new Person("Chris");
-                var child2 = new Person("Mary");
+            //static void Main(string[] args)
+            //{
+            //    var parent = new Person("John");
+            //    var child1 = new Person("Chris");
+            //    var child2 = new Person("Mary");
                 
-                var relationships = new Relationships();
-                relationships.AddParentAndChild(parent, child1);
-                relationships.AddParentAndChild(parent, child2);
+            //    var relationships = new Relationships();
+            //    relationships.AddParentAndChild(parent, child1);
+            //    relationships.AddParentAndChild(parent, child2);
 
-                new Research(relationships);
-                Console.ReadKey();
-            }
+            //    new Research(relationships);
+            //    Console.ReadKey();
+            //}
         }
     }
 }
