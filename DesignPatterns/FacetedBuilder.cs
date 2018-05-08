@@ -65,11 +65,11 @@ namespace DesignPatterns
             }
         } //builder
 
-        public static void Main()
-        {
-            Person pb = new PersonBuilder().Works.Called("Sagar").At("Digitas").As("Associate").Earning(0);
-            Console.WriteLine(pb.ToString());
-            Console.ReadKey();
-        }
+        //public static void Main()
+        //{
+        //    Person pb = new PersonBuilder().Works.Called("Sagar").At("Digitas").As("Associate").Earning(0);
+        //    Console.WriteLine(pb.ToString());
+        //    Console.ReadKey();
+        //}
     }
 }

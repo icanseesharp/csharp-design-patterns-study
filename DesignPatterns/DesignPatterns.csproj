@@ -48,8 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FactoryInnerclass.cs" />
     <Compile Include="DependencyInversion.cs" />
     <Compile Include="FacetedBuilder.cs" />
+    <Compile Include="FactoryMethod.cs" />
     <Compile Include="OpenClosePrinciple.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SingleResponsibility.cs" />
